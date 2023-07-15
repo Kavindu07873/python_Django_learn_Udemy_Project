@@ -130,3 +130,8 @@ STATIC_ROOT = BASE_DIR/'static'
 STATICFILES_DIRS = [
     'EComerceSite/static',
 ]
+
+# media file configuration
+MEDiA_URL = '/media/'
+MEDIA_ROOT =BASE_DIR/'media'
+
