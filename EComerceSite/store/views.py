@@ -35,5 +35,15 @@ def store(request,category_slug=None):
 
 
 def product_details(request ,category_slug,product_slug ):
-    return render(request , 'store/product_details.html')
+    try:
+        # category__slug mehema __ dekak dala apita puluwan vena app ekaka thiyenma model ekaka atribute ekak access karanna
+        single_product = Product.objects.get(category__slug = category_slug , slug = product_slug)
+    except Exception as e:
+        raise e
+    
+    context = {
+        'single_product':single_product
+    }
+
+    return render(request , 'store/product_details.html' ,context)
 
