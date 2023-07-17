@@ -8,7 +8,7 @@ from django.urls import path
 
 urlpatterns = [
     path('',views.cart  , name='cart'),
-    # path('<slug:category_slug>/',views.store  , name='product_by_category'),
+    path('add_cart/<int:product_id>/',views.add_cart  , name='add_cart'),
     # path('<slug:category_slug>/<slug:product_slug>/',views.product_details  , name='product_details'),
 
 ] 
