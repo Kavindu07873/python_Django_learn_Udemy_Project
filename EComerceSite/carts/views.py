@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render ,redirect
 from store.models import Product
 from .models import Cart ,CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 # Create your views here.
 
 #cookies wala thiyena session id eka ganne mehema private method ekakin 
@@ -13,6 +14,9 @@ def _cart_id(request):
 
 
 def add_cart(request, product_id):
+    color = request.GET['color']
+    size = request.GET['size']
+    return HttpResponse(color + '  '+ size)
     product = Product.objects.get(id = product_id) # get the product
 
     # cookies wala thiyena cart_id eka gaththa Cart eke id eka widiyata
@@ -69,6 +73,8 @@ def remove_cart_item(request , product_id):
 
 def cart(request ,total =0 ,quantity=0 ,cart_items = None):
     try:
+        tax =0
+        grand_total = 0
         cart = Cart.objects.get(cart_id = _cart_id(request))
         cart_items = CartItem.objects.filter(cart = cart , is_active =True)
         for cart_item in cart_items:
@@ -82,11 +88,11 @@ def cart(request ,total =0 ,quantity=0 ,cart_items = None):
         pass
 
     context ={
-        'total' : total,
-        'quantity':quantity,
-        'cart_items' : cart_items,
-        'tax':tax,
-        'grand_total' : grand_total
-    }
+            'total' : total,
+            'quantity':quantity,
+            'cart_items' : cart_items,
+            'tax':tax,
+            'grand_total' : grand_total
+        }
 
     return render(request , 'cart/cart.html' ,context)
