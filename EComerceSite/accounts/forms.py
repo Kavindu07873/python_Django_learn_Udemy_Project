@@ -3,16 +3,18 @@ from .models import Account
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'Enter Password'
+        'placeholder': 'Enter Password',
+        'class': 'form-control',
     }))
 
     Confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Enter Password'
     }))
-
+    
+    # methana normal user kenekta ona dewal witharai add karnne
     class Meta:
         model = Account
-        fields = ['first_name','last_name','username','email','phone_number','password']
+        fields = ['first_name','last_name','email','password']
 
 
     # apita loop ekak through serama atribute walata css add karanna puluwan
