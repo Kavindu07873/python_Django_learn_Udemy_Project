@@ -49,8 +49,11 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block"> Register  </button>
                     </div> <!-- form-group// -->      
-                        
+                   
+                    {{form.email.errors}}   
+                    {{form.non_field_errors}}     
                 </form>
+                
             </article><!-- card-body.// -->
         </div> <!-- card .// -->
         <p class="text-center mt-4">Have an account? <a href="">Log In</a></p>
