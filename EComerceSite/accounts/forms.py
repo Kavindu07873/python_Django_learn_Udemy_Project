@@ -10,11 +10,13 @@ class RegistrationForm(forms.ModelForm):
     Confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Enter Password'
     }))
-    
+
     # methana normal user kenekta ona dewal witharai add karnne
+    # me meta data tika mulinma balanawa normal userge dewalda kiyala 
     class Meta:
         model = Account
-        fields = ['first_name','last_name','email','password']
+        fields = ['first_name','last_name','email','password','phone_number']
+        # fields = ['first_name','last_name','email','password']
 
 
     # apita loop ekak through serama atribute walata css add karanna puluwan
