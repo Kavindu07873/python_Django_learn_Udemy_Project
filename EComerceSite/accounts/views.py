@@ -98,3 +98,6 @@ def logout(request):
 
 def activate(request ,uidb64 ,token):
     return HttpResponse("ok")
+
+def dashboard(request):
+    return render(request ,'accounts/dashboard.html')
