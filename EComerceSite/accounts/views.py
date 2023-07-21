@@ -99,5 +99,9 @@ def logout(request):
 def activate(request ,uidb64 ,token):
     return HttpResponse("ok")
 
+@login_required(login_url='login')
 def dashboard(request):
     return render(request ,'accounts/dashboard.html')
+
+def forgetpassword(request):
+    return render(request , 'accounts/forgetpassword.html')
