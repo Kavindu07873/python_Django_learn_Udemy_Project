@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser ,BaseUserManager
 # create super admin
 class MyAccountManager(BaseUserManager):
     # creating a normal user
-    def create_user(self,first_name,last_name,username,phone_number,email,password=None):
+    def create_user(self,first_name,last_name,username,email,password=None):
         if not email:
             raise ValueError('User must have an email address')
         if not username:
@@ -15,7 +15,7 @@ class MyAccountManager(BaseUserManager):
             username = username,
             first_name = first_name,
             last_name = last_name,
-            phone_number= phone_number,
+            # phone_number= phone_number,
         )
 
         user.set_password(password)
