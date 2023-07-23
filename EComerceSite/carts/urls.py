@@ -14,5 +14,6 @@ urlpatterns = [
 
 
     # path('<slug:category_slug>/<slug:product_slug>/',views.product_details  , name='product_details'),
-
+    path('checkout/' ,views.checkout ,name='checkout'),
+    
 ] 
