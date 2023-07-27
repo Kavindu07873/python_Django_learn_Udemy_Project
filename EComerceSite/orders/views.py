@@ -84,7 +84,7 @@ from accounts.models import Account
 def payments(request , total =0):
     body = json.loads(request.body)
     order = Order.objects.get(user=request.user, is_ordered=False, order_number=body['orderID'])
-    print(order)
+    print(order.order_number)
     print(body)
 
     
@@ -164,11 +164,15 @@ def payments(request , total =0):
 #     to_email = request.user.email
 #     send_email = EmailMessage(mail_subject, message, to=[to_email])
 #     send_email.send()
+# Send order number and transaction id back to sendData method via JsonResponse
+    data = {
+        'order_number': order.order_number,
+        'transID': payment_id,
+    }
+    return JsonResponse(data)
 
 
 
-
-    return HttpResponse("OK")
 
     
 
@@ -244,4 +248,4 @@ def place_order(request ,total =0 ,quantity = 0):
         
 
 def order_complete(request):
-     return HttpResponse("ok")
+     return render(request ,  'orders/order_complete.html')
