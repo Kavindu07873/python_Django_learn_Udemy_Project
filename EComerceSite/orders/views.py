@@ -104,11 +104,11 @@ def payments(request , total =0):
 
     # request id genarate
     payment_id = 'P'+ order.order_number
-    print(payment_id)
+    # print(payment_id)
     # print(user)
-    print(order.status)
-    print(order.order_total)
-    print(body['payment_method'])
+    # print(order.status)
+    # print(order.order_total)
+    # print(body['payment_method'])
 
     
 
@@ -131,6 +131,7 @@ def payments(request , total =0):
     for item in cart_items:
          orderproduct = OrderProduct()
          orderproduct.order_id = order.id
+         print(orderproduct.order_id)
          orderproduct.payment = payment
          orderproduct.user_id = request.user.id
          orderproduct.product_id = item.product_id
@@ -172,9 +173,6 @@ def payments(request , total =0):
     return JsonResponse(data)
 
 
-
-
-    
 
 def place_order(request ,total =0 ,quantity = 0):
     current_user = request.user
@@ -248,4 +246,32 @@ def place_order(request ,total =0 ,quantity = 0):
         
 
 def order_complete(request):
-     return render(request ,  'orders/order_complete.html')
+     order_number = request.GET.get('order_number')
+     transId  = request.GET.get('payment_id')
+    #  print(order_number)
+    #  print(transId)
+
+     try:
+        order = Order.objects.get(order_number=order_number)
+        ordered_products = OrderProduct.objects.filter(order_id=order.id)
+
+        subtotal = 0
+        for i in ordered_products:
+            subtotal += i.product_price * i.quantity
+
+        payment = Payment.objects.get(payment_id=transId)
+
+        context = {
+            'order': order,
+            'ordered_products': ordered_products,
+            'order_number': order.order_number,
+            'transID': payment.payment_id,
+            'payment': payment,
+            'subtotal': subtotal,
+        }
+        return render(request, 'orders/order_complete.html', context)
+     except (Payment.DoesNotExist , Order.DoesNotExist)  :
+        return redirect('home')
+
+     
+    #   return render(request ,  'orders/order_complete.html')

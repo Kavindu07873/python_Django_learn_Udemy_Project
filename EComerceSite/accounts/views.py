@@ -62,7 +62,7 @@ def register(request):
 
             
             messages.success(request, 'Registation sucessful.')
-            return redirect('register') 
+            return redirect('login') 
 
         else:
             print("not save")
