@@ -65,6 +65,9 @@ class Account(AbstractBaseUser):
     # api super user eka use karanawa kiyanna ona
     objects =MyAccountManager() 
 
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
     # return karanne email eka acount eke object eka widiyata template ekata
     def __str__(self):
         return self.email
