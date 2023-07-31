@@ -58,9 +58,15 @@ def product_details(request ,category_slug,product_slug ):
         raise e
     
 # methanin user order ekak gaththgothada nadda kiyala balanawa true , false da kiyala  
-    try:
-        orderproduct =OrderProduct.objects.filter(user = request.user , product_id = single_product.id).exists()
-    except OrderProduct.DoesNotExist:
+# methana error ekak enawa
+# Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x00000296EE37A8D0>>.
+# ekanisa methanata if ekak danawa
+    if request.user.is_authenticated:
+        try:
+            orderproduct =OrderProduct.objects.filter(user = request.user , product_id = single_product.id).exists()
+        except OrderProduct.DoesNotExist:
+            orderproduct =None
+    else:
         orderproduct =None
 
 # Get the review
