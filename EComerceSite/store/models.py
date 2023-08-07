@@ -84,4 +84,10 @@ class ReviewRating(models.Model):
         return self.subject
         
 
+class ABC(models.Model):
+    name = models.CharField(max_length=100 , blank=True)
+
+
+class Cde(ABC):
+    age = models.CharField(max_length=100 ,blank=True)
 
